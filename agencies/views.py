@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-
+from django.core.paginator import Paginator
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
@@ -15,7 +15,7 @@ from agencies.models import Agency, Destination, ServiceProvider
 
 
 def home(request):
-    agencies = ServiceProvider.objects.all()[:6]
+    agencies = ServiceProvider.objects.all()
 
     categories = ServiceProvider.objects.values_list(
         "service_category", flat=True
@@ -35,7 +35,20 @@ def home(request):
                 | Q(county__icontains=search_text)
                 | Q(region__icontains=search_text)
             ).filter(service_category=service_category)
-    context = {"agencies": agencies, "categories": list(categories)}
+
+        elif search_text:
+            agencies = ServiceProvider.objects.filter(
+                Q(name__icontains=search_text) | Q(town__icontains=search_text) | Q(tra_number__icontains=search_text) | Q(county__icontains=search_text) | Q(region__icontains=search_text)
+            )
+        elif service_category:
+            agencies = ServiceProvider.objects.filter(service_category=service_category)
+    
+
+    paginator = Paginator(agencies, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj, "categories": list(categories)}
 
     return render(request, "home.html", context)
 
