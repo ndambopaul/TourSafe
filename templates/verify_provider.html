@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section">
+  <h1>Find Trusted Tour Agencies Anywhere</h1>
+</div>
+
+<!-- Search Bar -->
+<div class="container search-bar">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-4">
+          <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search provider here...">
+          <button class="btn btn-primary" type="submit">Verify Service Provider</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <div class="col-md-4">
+            <div class="card my-2">
+              <div class="card-body">
+                  <h5 class="card-title">{{provider.name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{provider.service_category}}</h6>
+                  <p class="card-text">
+                      <strong>Email:</strong> {{provider.email}} <br>
+                      <strong>Phone:</strong> {{provider.phone_number}} <br>
+                      <strong>County/Region:</strong> {{provider.region}}
+                  </p>
+                  <a href="" class="btn btn-info btn-sm">See Details</a>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

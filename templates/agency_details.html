@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Navbar -->
+  <div class="container my-5">
+    <section class="container">
+      <h2>{{ agency.name }}</h2>
+      <p class="text-muted">Your gateway to exciting and unforgettable travel experiences.</p>
+      <hr>
+
+      <div class="row">
+          <div class="col-md-6">
+              <h4>About Us</h4>
+              <p>
+                  GlobeTrotter is an experienced travel agency that offers customized travel plans, 
+                  helping you explore the world with ease and comfort.
+              </p>
+          </div>
+
+          <div class="col-md-6">
+              <h4>Services</h4>
+              <ul>
+                  <li>Flight Bookings</li>
+                  <li>Hotel Reservations</li>
+                  <li>Custom Travel Packages</li>
+                  <li>Local Tours & Guides</li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="row mt-4">
+          <div class="col-md-12">
+              <h4>Contact Information</h4>
+              <ul>
+                  <li><b>TRA No:</b> {{ agency.tra_number }}</li>
+                  <li><b>Email:</b> {{ agency.email }}</li>
+                  <li><b>Phone:</b> {{ agency.phone_number }}</li>
+                  <li><b>Regional Office:</b> {{agency.region}}</li>
+              </ul>
+          </div>
+      </div>
+  </section>
+</div>
+{% endblock content %}

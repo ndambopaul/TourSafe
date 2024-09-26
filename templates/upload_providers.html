@@ -1,0 +1,28 @@
+<div class="modal fade" id="uploadProvidersModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Upload Service Providers</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'upload-providers' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                  
+                <div class="mb-2">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="providers_file"
+                    name="providers_file"
+                    required
+                  />
+                </div>
+                     
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Upload Service Providers</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>
