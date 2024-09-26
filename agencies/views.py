@@ -78,12 +78,19 @@ def verify_provider(request):
             provider = ServiceProvider.objects.filter(
                 Q(name__icontains=search_text)
                 | Q(tra_number__icontains=search_text)
-            )
+            ).first()
 
-            context = {
-                "provider_found": True,
-                "provider": provider
-            }
+            if not provider:
+                context = {
+                    "provider_found": False,
+                    "message": "No verified tour service provider found with the information you searched for."
+                }
+
+            else:
+                context = {
+                    "provider_found": True,
+                    "provider": provider
+                }
 
             print(context)
     print("***********Outside If Statement***********")

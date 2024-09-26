@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="hero-section">
-  <h1>Find Trusted Tour Agencies Anywhere</h1>
+  <h1>Verify Tour Service Provider</h1>
 </div>
 
 <!-- Search Bar -->
@@ -19,24 +19,35 @@
       
     </div>
   </div>
+ 
   <div class="row">
-    <div class="col">
-        <div class="col-md-4">
-            <div class="card my-2">
-              <div class="card-body">
-                  <h5 class="card-title">{{provider.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{provider.service_category}}</h6>
-                  <p class="card-text">
-                      <strong>Email:</strong> {{provider.email}} <br>
-                      <strong>Phone:</strong> {{provider.phone_number}} <br>
-                      <strong>County/Region:</strong> {{provider.region}}
-                  </p>
-                  <a href="" class="btn btn-info btn-sm">See Details</a>
-              </div>
-          </div>
+    <div class="col-md-3"></div>
+    {% if provider_found %}
+      <div class="col-md-6">
+          <div class="card my-2">
+            <div class="card-body">
+                <h5 class="card-title">{{provider.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{provider.service_category}}</h6>
+                <p class="card-text">
+                    <strong>Email:</strong> {{provider.email}} <br>
+                    <strong>Phone:</strong> {{provider.phone_number}} <br>
+                    <strong>County/Region:</strong> {{provider.region}}
+                </p>
+                <a href="{% url 'agency-details' provider.id %}" class="btn btn-info btn-sm">See Details</a>
+            </div>
         </div>
-    </div>
+      </div>
+    {% elif not provider_found and message %}
+      <div class="col-md-6">
+        <div class="alert alert-danger" role="alert">
+          {{message}}
+        </div>
+      </div>
+      {% endif %}
   </div>
+  
+  <div class="row mt-5"></div>
+  <div class="row mt-5"></div>
 </div>
 
 {% endblock content %}
